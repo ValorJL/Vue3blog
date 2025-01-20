@@ -5,6 +5,8 @@ import Home from '../views/Home.vue';
 import About from '../views/About.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
+import BlogDetail from '../views/BlogDetail.vue';
+import NewBlog from '../views/NewBlog.vue';
 
 // 定义路由规则
 const routes = [
@@ -27,6 +29,16 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register,
+  },
+  {
+    path: '/blogdetail',
+    name: 'BlogDetail',
+    component: BlogDetail,
+  },
+  {
+    path: '/newblog',
+    name: 'NewBlog',
+    component: NewBlog,
   },
 ];
 

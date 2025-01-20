@@ -6,10 +6,18 @@
       :rules="rules"
       @submit.native.prevent="handleLogin"
     >
-      <el-form-item label="Username" :label-width="formLabelWidth">
+      <el-form-item
+        label="Username"
+        :label-width="formLabelWidth"
+        prop="username"
+      >
         <el-input v-model="loginForm.username" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="Password" :label-width="formLabelWidth">
+      <el-form-item
+        label="Password"
+        :label-width="formLabelWidth"
+        prop="password"
+      >
         <el-input
           type="password"
           v-model="loginForm.password"
@@ -17,7 +25,7 @@
         ></el-input>
       </el-form-item>
       <div class="button-container">
-        <el-button type="primary" @click="handleLogin">Login</el-button>
+        <el-button type="primary" native-type="submit">Login</el-button>
         <el-button type="default" @click="navigateToRegister"
           >Register</el-button
         >
@@ -38,17 +46,33 @@ export default {
       rules: {
         username: [
           { required: true, message: "Username is required", trigger: "blur" },
+          {
+            required: true,
+            message: "Username is required",
+            trigger: "submit",
+          }, // 触发提交时的验证
         ],
         password: [
           { required: true, message: "Password is required", trigger: "blur" },
+          {
+            required: true,
+            message: "Password is required",
+            trigger: "submit",
+          }, // 触发提交时的验证
         ],
       },
     };
   },
   methods: {
     handleLogin() {
-      console.log("Login form submitted", this.loginForm);
-      // Add your login logic here
+      this.$refs.loginForm.validate((valid) => {
+        if (valid) {
+          console.log("Login form submitted", this.loginForm);
+        } else {
+          console.log("Validation failed");
+          return false;
+        }
+      });
     },
     navigateToRegister() {
       this.$router.push("/register");
